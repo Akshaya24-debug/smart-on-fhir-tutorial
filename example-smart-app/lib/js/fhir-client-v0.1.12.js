@@ -17140,6 +17140,7 @@ BBClient.settings = {
 * @return boolean
 */
 function validTokenResponse() {
+	debugger;
   if (BBClient.settings.fullSessionStorageSupport && sessionStorage.tokenResponse) {
     return true;
   } else {
@@ -17165,7 +17166,7 @@ function isFakeOAuthToken(){
 BBClient.ready = function(input, callback, errback){
 
   var args = readyArgs.apply(this, arguments);
-
+debugger;
   // decide between token flow (implicit grant) and code flow (authorization code grant)
   var isCode = urlParam('code') || (args.input && args.input.code);
 
@@ -17272,7 +17273,7 @@ function providers(fhirServiceUrl, provider, callback, errback){
     });
     return;
   }
-
+ debugger;
   Adapter.get().http({
     method: "GET",
     url: stripTrailingSlash(fhirServiceUrl) + "/metadata"
@@ -17409,9 +17410,9 @@ BBClient.authorize = function(params, errback){
     }
     
     sessionStorage[state] = JSON.stringify(params);
-
+    debugger;
     console.log("sending client reg", params.client);
-
+    debugger;
     var redirect_to=params.provider.oauth2.authorize_uri + "?" + 
       "client_id="+encodeURIComponent(client.client_id)+"&"+
       "response_type="+encodeURIComponent(params.response_type)+"&"+
@@ -17419,7 +17420,7 @@ BBClient.authorize = function(params, errback){
       "redirect_uri="+encodeURIComponent(client.redirect_uri)+"&"+
       "state="+encodeURIComponent(state)+"&"+
       "aud="+encodeURIComponent(params.server);
-    
+    debugger;
     if (typeof client.launch !== 'undefined' && client.launch) {
        redirect_to += "&launch="+encodeURIComponent(client.launch);
     }
